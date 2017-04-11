@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-sails/sails/errors/fatal.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-sails">npmtest-sails (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-sails/sails/errors/fatal.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">7.41% <small>(6 / 81)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">7.41% <small>(6 / 81)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-sails/sails/errors/</a> &#187; fatal.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Module dependencies
+ */
+var nodeutil = require('util');
+var nodepath = require('path');
+var chalk = require('chalk');
+&nbsp;
+// Build logger using best-available information
+// when this module is initially required.
+var log = require('captains-log')(require('../lib/app/configuration/rc'));
+&nbsp;
+/**
+ * Fatal Errors
+ */
+module.exports = {
+&nbsp;
+  // Lift-time and load-time errors
+  failedToLoadSails: <span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error(err);</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Could not load Sails.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Are you using the latest stable version?');</span>
+<span class="cstat-no" title="statement not covered" >    _terminateProcess(1);</span>
+  },
+&nbsp;
+  noPackageJSON: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Cannot read package.json in the current directory (' + process.cwd() + ')');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Are you sure this is a Sails app?');</span>
+<span class="cstat-no" title="statement not covered" >    _terminateProcess(1);</span>
+  },
+&nbsp;
+  notSailsApp: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('The package.json in the current directory does not list Sails as a dependency...');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Are you sure `' + process.cwd() + '` is a Sails app?');</span>
+<span class="cstat-no" title="statement not covered" >    _terminateProcess(1);</span>
+  },
+&nbsp;
+  badLocalDependency: <span class="fstat-no" title="function not covered" >function(pathTo_localSails, requiredVersion) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error(</span>
+      'The local Sails dependency installed at `' + pathTo.localSails + '` ' +
+      'has a corrupted, missing, or un-parsable package.json file.'
+    );
+<span class="cstat-no" title="statement not covered" >    log.error('You may consider running:');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('rm -rf ' + pathTo_localSails + ' &amp;&amp; npm install sails@' + app.dependencies.sails);</span>
+<span class="cstat-no" title="statement not covered" >    _terminateProcess(1);</span>
+  },
+&nbsp;
+  // TODO: replace the inline version of this error
+  // app/loadHooks.js:42
+  malformedHook: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Malformed hook! (' + id + ')');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Hooks should be a function with one argument (`sails`)');</span>
+<span class="cstat-no" title="statement not covered" >    _terminateProcess(1);</span>
+  },
+&nbsp;
+  // TODO: replace the inline version of this error
+  // app/load.js:146
+  hooksTookTooLong: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    var hooksTookTooLongErr = 'Hooks are taking way too long to get ready...  ' +</span>
+      'Something might be amiss.\nAre you using any custom hooks?\nIf so, make sure the hook\'s ' +
+      '`initialize()` method is triggering its callback.';
+<span class="cstat-no" title="statement not covered" >    log.error(hooksTookTooLongErr);</span>
+<span class="cstat-no" title="statement not covered" >    process.exit(1);</span>
+  },
+&nbsp;
+&nbsp;
+&nbsp;
+  // Invalid user module errors
+  invalidCustomResponse: <span class="fstat-no" title="function not covered" >function(responseIdentity) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Cannot define custom response `' + responseIdentity + '`.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('`res.' + responseIdentity + '` has special meaning in Connect/Express/Sails.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Please remove the `' + responseIdentity + '` file from the `responses` directory.');</span>
+<span class="cstat-no" title="statement not covered" >    _terminateProcess(1);</span>
+  },
+&nbsp;
+&nbsp;
+&nbsp;
+  // This doesn't technically _need_ to be a fatal error- it just is
+  // because certain grunt modules (e.g. grunt-contrib-watch) don't restart
+  // when an error occurs.
+  __GruntAborted__: <span class="fstat-no" title="function not covered" >function(consoleMsg, stackTrace) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var gruntErr =</span>
+      '\n------------------------------------------------------------------------\n' +
+      consoleMsg + '\n' + (stackTrace || '') +
+      '\n------------------------------------------------------------------------';
+<span class="cstat-no" title="statement not covered" >    log.error(gruntErr);</span>
+<span class="cstat-no" title="statement not covered" >    log.blank();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    log.error('Looks like a Grunt error occurred--');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Please fix it, then **restart Sails** to continue running tasks (e.g. watching for changes in assets)');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Or if you\'re stuck, check out the troubleshooting tips below.');</span>
+<span class="cstat-no" title="statement not covered" >    log.blank();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    log.error(chalk.underline('Troubleshooting tips:'));</span>
+<span class="cstat-no" title="statement not covered" >    var relativePublicPath = (nodepath.resolve(process.cwd(), './.tmp'));</span>
+<span class="cstat-no" title="statement not covered" >    var uid = process.getuid &amp;&amp; process.getuid() || 'YOUR_COMPUTER_USER_NAME';</span>
+<span class="cstat-no" title="statement not covered" >    log.error();</span>
+<span class="cstat-no" title="statement not covered" >    log.error(' *-&gt; Are "grunt" and related grunt task modules installed locally?  Run `npm install` if you\'re not sure.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error();</span>
+<span class="cstat-no" title="statement not covered" >    log.error(' *-&gt; You might have a malformed LESS, SASS, CoffeeScript file, etc.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error();</span>
+<span class="cstat-no" title="statement not covered" >    log.error(' *-&gt; Or maybe you don\'t have permissions to access the `.tmp` directory?');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('     e.g., `' + relativePublicPath + '`', '?');</span>
+<span class="cstat-no" title="statement not covered" >    log.error();</span>
+<span class="cstat-no" title="statement not covered" >    log.error('     If you think this might be the case, try running:');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('     sudo chown -R', uid, relativePublicPath);</span>
+<span class="cstat-no" title="statement not covered" >    log.blank();</span>
+&nbsp;
+    // See note above this function - for now, this will not
+    // actually terminate the process.  The rest of Sails should
+    // continue to run.
+    // return _terminateProcess(1);
+  },
+&nbsp;
+&nbsp;
+  __UnknownPolicy__: <span class="fstat-no" title="function not covered" >function(policy, source, pathToPolicies) {</span>
+<span class="cstat-no" title="statement not covered" >    source = source || 'config.policies';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    log.error('Unknown policy, "' + policy + '", referenced in `' + source + '`.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Are you sure that policy exists?');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('It would be located at: `' + pathToPolicies + '/' + policy + '.js`');</span>
+<span class="cstat-no" title="statement not covered" >    return _terminateProcess(1);</span>
+  },
+&nbsp;
+  __InvalidConnection__: <span class="fstat-no" title="function not covered" >function(connection, sourceModelId) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('In model (' + sourceModelId + '), invalid connection ::', connection);</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Must contain an `adapter` key referencing the adapter to use.');</span>
+<span class="cstat-no" title="statement not covered" >    return _terminateProcess(1);</span>
+  },
+&nbsp;
+  __UnknownConnection__: <span class="fstat-no" title="function not covered" >function(connectionId, sourceModelId) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Unknown connection, "' + connectionId + '", referenced in model `' + sourceModelId + '`.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Are you sure that connection exists?  It should be defined in `sails.config.connections`.');</span>
+&nbsp;
+    // var probableAdapterModuleName = connectionId.toLowerCase();
+    // if ( ! probableAdapterModuleName.match(/^(sails-|waterline-)/) ) {
+    // 	probableAdapterModuleName = 'sails-' + probableAdapterModuleName;
+    // }
+    // log.error('Otherwise, if you\'re trying to use an adapter named `' + connectionId + '`, please run ' +
+    // 	'`npm install ' + probableAdapterModuleName + '@' + sails.majorVersion + '.' + sails.minorVersion + '.x`');
+<span class="cstat-no" title="statement not covered" >    return _terminateProcess(1);</span>
+  },
+&nbsp;
+&nbsp;
+  __ModelIsMissingConnection__: <span class="fstat-no" title="function not covered" >function(sourceModelId) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error(nodeutil.format('One of your models (%s) doesn\'t have a connection.', sourceModelId));</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Do you have a default `connection` in your `config/models.js` file?');</span>
+<span class="cstat-no" title="statement not covered" >    return _terminateProcess(1);</span>
+  },
+&nbsp;
+  __UnknownAdapter__: <span class="fstat-no" title="function not covered" >function(adapterId, sourceModelId, sailsMajorV, sailsMinorV) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Trying to use unknown adapter, "' + adapterId + '", in model `' + sourceModelId + '`.');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Are you sure that adapter is installed in this Sails app?');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('If you wrote a custom adapter with identity="' + adapterId + '", it should be in this app\'s adapters directory.');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var probableAdapterModuleName = adapterId.toLowerCase();</span>
+<span class="cstat-no" title="statement not covered" >    if (!probableAdapterModuleName.match(/^(sails-|waterline-)/)) {</span>
+<span class="cstat-no" title="statement not covered" >      probableAdapterModuleName = 'sails-' + probableAdapterModuleName;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    log.error('Otherwise, if you\'re trying to use an adapter named `' + adapterId + '`, please run ' +</span>
+      '`npm install ' + probableAdapterModuleName + ' --save'/*'@' + sailsMajorV + '.' + sailsMinorV + '.x`'*/);
+<span class="cstat-no" title="statement not covered" >    return _terminateProcess(1);</span>
+  },
+&nbsp;
+  __InvalidAdapter__: <span class="fstat-no" title="function not covered" >function(attemptedModuleName, supplementalErrMsg) {</span>
+<span class="cstat-no" title="statement not covered" >    log.error('There was an error attempting to require("' + attemptedModuleName + '")');</span>
+<span class="cstat-no" title="statement not covered" >    log.error('Is this a valid Sails/Waterline adapter?  The following error was encountered ::');</span>
+<span class="cstat-no" title="statement not covered" >    log.error(supplementalErrMsg);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return _terminateProcess(1);</span>
+  }
+};
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ *
+ * TODO: Make all of this more elegant.
+ * ========================================================
+ * + Ideally we don't call `process.exit()` at all.
+ * We should consistently use `sails.lower()` for unhandleable core
+ * errors and just trigger the appropriate callback w/ an error for
+ * core lift/load and any CLI errors.
+ *
+ * + Then we won't have to worry as much about dangling child processes
+ * and things like that. Plus it's more testable that way.
+ *
+ * In practice, the best way to do this may be an error domain or an
+ * event emitted on the sails object (or both!)
+ * ========================================================
+ *
+ *
+ *
+ * TODO: Merge w/ app/teardown.js
+ * ========================================================
+ * (probably achievable by doing the aforementioned cleanup)
+ * ========================================================
+ */
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * _terminateProcess
+ *
+ * Terminate the process as elegantly as possible.
+ * If process.env is 'test', throw instead.
+ *
+ * @param  {[type]} code [console error code]
+ * @param  {[type]} opts [currently unused]
+ */
+<span class="fstat-no" title="function not covered" >function _terminateProcess(code, opts) {</span>
+<span class="cstat-no" title="statement not covered" >  if (process.env.NODE_ENV === 'test') {</span>
+<span class="cstat-no" title="statement not covered" >    var Signal = new Error({</span>
+      type: 'terminate',
+      code: code,
+      options: {
+        todo: 'put the stuff from the original errors in here'
+      }
+    });
+<span class="cstat-no" title="statement not covered" >    throw Signal;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return process.exit(code);</span>
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 05:58:54 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
