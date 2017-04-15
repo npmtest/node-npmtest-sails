@@ -1,4 +1,6 @@
-<html lang="en"><head>
+<!doctype html>
+<html lang="en">
+<head>
     <title>Code coverage report for node-npmtest-sails/sails/lib/router/bind.js</title>
     <meta charset="utf-8">
     <style>
@@ -208,11 +210,11 @@
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-sails/sails/lib/router/</a> » bind.js</div>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-sails/sails/lib/router/</a> &#187; bind.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
-<tbody><tr><td class="line-count">1
+<tr><td class="line-count">1
 2
 3
 4
@@ -942,42 +944,42 @@ module.exports = bind;
  * @api private
  */
 &nbsp;
-<span class="fstat-no" title="function not covered">function bind( /* path, target, verb, options */ ) {</span>
-<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+<span class="fstat-no" title="function not covered" >function bind( /* path, target, verb, options */ ) {</span>
+<span class="cstat-no" title="statement not covered" >  var sails = this.sails;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  var args = sanitize.apply(this, Array.prototype.slice.call(arguments));</span>
-<span class="cstat-no" title="statement not covered">  var path = args.path;</span>
-<span class="cstat-no" title="statement not covered">  var target = args.target;</span>
-<span class="cstat-no" title="statement not covered">  var verb = args.verb;</span>
-<span class="cstat-no" title="statement not covered">  var options = args.options;</span>
+<span class="cstat-no" title="statement not covered" >  var args = sanitize.apply(this, Array.prototype.slice.call(arguments));</span>
+<span class="cstat-no" title="statement not covered" >  var path = args.path;</span>
+<span class="cstat-no" title="statement not covered" >  var target = args.target;</span>
+<span class="cstat-no" title="statement not covered" >  var verb = args.verb;</span>
+<span class="cstat-no" title="statement not covered" >  var options = args.options;</span>
 &nbsp;
   // Don't allow paths with "length" as a route param, because Express chokes on it
-<span class="cstat-no" title="statement not covered">  if (path.match(/\/:length($|\/)/)) {</span>
-<span class="cstat-no" title="statement not covered">    throw new Error('Failed to bind route: `'+ path +'`\n'+</span>
+<span class="cstat-no" title="statement not covered" >  if (path.match(/\/:length($|\/)/)) {</span>
+<span class="cstat-no" title="statement not covered" >    throw new Error('Failed to bind route: `'+ path +'`\n'+</span>
     'Routes which contain `/:length` in their address URL are not supported by Sails/Express (consider using `/:len`)');
   }
 &nbsp;
   // Bind a list of multiple functions in order
-<span class="cstat-no" title="statement not covered">  if (_.isArray(target)) {</span>
-<span class="cstat-no" title="statement not covered">    bindArray.apply(this, [path, target, verb, options]);</span>
+<span class="cstat-no" title="statement not covered" >  if (_.isArray(target)) {</span>
+<span class="cstat-no" title="statement not covered" >    bindArray.apply(this, [path, target, verb, options]);</span>
   }
   // Handle string redirects
-  // (to either public-facing&nbsp;URLs or internal routes)
-  else <span class="cstat-no" title="statement not covered">if (_.isString(target) &amp;&amp; target.match(/^(https?:|\/)/)) {</span>
-<span class="cstat-no" title="statement not covered">    bindRedirect.apply(this, [path, target, verb, options]);</span>
+  // (to either public-facing URLs or internal routes)
+  else <span class="cstat-no" title="statement not covered" >if (_.isString(target) &amp;&amp; target.match(/^(https?:|\/)/)) {</span>
+<span class="cstat-no" title="statement not covered" >    bindRedirect.apply(this, [path, target, verb, options]);</span>
   }
 &nbsp;
   // Bind a middleware function directly
-  else <span class="cstat-no" title="statement not covered">if (_.isFunction(target)) {</span>
-<span class="cstat-no" title="statement not covered">    bindFunction.apply(this, [path, target, verb, options]);</span>
+  else <span class="cstat-no" title="statement not covered" >if (_.isFunction(target)) {</span>
+<span class="cstat-no" title="statement not covered" >    bindFunction.apply(this, [path, target, verb, options]);</span>
   }
 &nbsp;
   // If target is an object with a `target`, pull out the rest
   // of the keys as route options and then bind the target.
-  else <span class="cstat-no" title="statement not covered">if (_.isPlainObject(target) &amp;&amp; (target.target || target.fn)) {</span>
-<span class="cstat-no" title="statement not covered">    var _target = target.target || target.fn;</span>
-<span class="cstat-no" title="statement not covered">    options = _.merge(options, _.omit(target, 'target'));</span>
-<span class="cstat-no" title="statement not covered">    bind.apply(this, [path, _target, verb, options]);</span>
+  else <span class="cstat-no" title="statement not covered" >if (_.isPlainObject(target) &amp;&amp; (target.target || target.fn)) {</span>
+<span class="cstat-no" title="statement not covered" >    var _target = target.target || target.fn;</span>
+<span class="cstat-no" title="statement not covered" >    options = _.merge(options, _.omit(target, 'target'));</span>
+<span class="cstat-no" title="statement not covered" >    bind.apply(this, [path, _target, verb, options]);</span>
   }
   else {
 &nbsp;
@@ -987,7 +989,7 @@ module.exports = bind;
     // so we'll emit an event informing any listeners that an unrecognized route
     // target was encountered.  Then hooks can listen to this event and act
     // accordingly.  This makes it easier to add functionality to Sails.
-<span class="cstat-no" title="statement not covered">    sails.emit('route:typeUnknown', {</span>
+<span class="cstat-no" title="statement not covered" >    sails.emit('route:typeUnknown', {</span>
       path: path,
       target: target,
       verb: verb,
@@ -1000,7 +1002,7 @@ module.exports = bind;
   }
 &nbsp;
   // Makes `.bind()` chainable (sort of)
-<span class="cstat-no" title="statement not covered">  return sails;</span>
+<span class="cstat-no" title="statement not covered" >  return sails;</span>
 &nbsp;
 }
 &nbsp;
@@ -1012,12 +1014,12 @@ module.exports = bind;
  *
  * @api private
  */
-<span class="fstat-no" title="function not covered">function bindRedirect(path, redirectTo, verb, options) {</span>
-<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+<span class="fstat-no" title="function not covered" >function bindRedirect(path, redirectTo, verb, options) {</span>
+<span class="cstat-no" title="statement not covered" >  var sails = this.sails;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  bind.apply(this,[path, <span class="fstat-no" title="function not covered">function(req, res) {</span></span>
-<span class="cstat-no" title="statement not covered">    sails.log.verbose('Redirecting request (`' + path + '`) to `' + redirectTo + '`...');</span>
-<span class="cstat-no" title="statement not covered">    res.redirect(redirectTo);</span>
+<span class="cstat-no" title="statement not covered" >  bind.apply(this,[path, <span class="fstat-no" title="function not covered" >function(req, res) {</span></span>
+<span class="cstat-no" title="statement not covered" >    sails.log.verbose('Redirecting request (`' + path + '`) to `' + redirectTo + '`...');</span>
+<span class="cstat-no" title="statement not covered" >    res.redirect(redirectTo);</span>
   }, verb, options]);
 }
 &nbsp;
@@ -1031,16 +1033,16 @@ module.exports = bind;
  *
  * @api private
  */
-<span class="fstat-no" title="function not covered">function bindArray(path, target, verb, options) {</span>
-<span class="cstat-no" title="statement not covered">  var self = this;</span>
-<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+<span class="fstat-no" title="function not covered" >function bindArray(path, target, verb, options) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  var sails = this.sails;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  if (target.length === 0) {</span>
-<span class="cstat-no" title="statement not covered">    sails.log.verbose('Ignoring empty array in `router.bind(' + path + ')`...');</span>
+<span class="cstat-no" title="statement not covered" >  if (target.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >    sails.log.verbose('Ignoring empty array in `router.bind(' + path + ')`...');</span>
   } else {
     // Bind each middleware fn
-<span class="cstat-no" title="statement not covered">    _.each(target, <span class="fstat-no" title="function not covered">function(fn) {</span></span>
-<span class="cstat-no" title="statement not covered">      bind.apply(self,[path, fn, verb, options]);</span>
+<span class="cstat-no" title="statement not covered" >    _.each(target, <span class="fstat-no" title="function not covered" >function(fn) {</span></span>
+<span class="cstat-no" title="statement not covered" >      bind.apply(self,[path, fn, verb, options]);</span>
     });
   }
 }
@@ -1052,16 +1054,16 @@ module.exports = bind;
  *
  * @api private
  */
-<span class="fstat-no" title="function not covered">function bindFunction(path, fn, verb, options) {</span>
-<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+<span class="fstat-no" title="function not covered" >function bindFunction(path, fn, verb, options) {</span>
+<span class="cstat-no" title="statement not covered" >  var sails = this.sails;</span>
 &nbsp;
   // Regex to check if a URL is an asset (something with a file extension)
-<span class="cstat-no" title="statement not covered">  var skipAssetsRegex = /^[^?]*\/[^?\/]+\.[^?\/]+(\?.*)?$/;</span>
+<span class="cstat-no" title="statement not covered" >  var skipAssetsRegex = /^[^?]*\/[^?\/]+\.[^?\/]+(\?.*)?$/;</span>
 &nbsp;
   // Make sure (optional) options is a valid plain object ({})
-<span class="cstat-no" title="statement not covered">  options = _.isPlainObject(options) ? _.cloneDeep(options) : {};</span>
-<span class="cstat-no" title="statement not covered">  var _middlewareType = options._middlewareType || fn._middlewareType || (fn.name &amp;&amp; ('FUNCTION: ' + fn.name));</span>
-<span class="cstat-no" title="statement not covered">  sails.log.silly('Binding route :: ', verb || '', path, _middlewareType?('('+_middlewareType+')'):'');</span>
+<span class="cstat-no" title="statement not covered" >  options = _.isPlainObject(options) ? _.cloneDeep(options) : {};</span>
+<span class="cstat-no" title="statement not covered" >  var _middlewareType = options._middlewareType || fn._middlewareType || (fn.name &amp;&amp; ('FUNCTION: ' + fn.name));</span>
+<span class="cstat-no" title="statement not covered" >  sails.log.silly('Binding route :: ', verb || '', path, _middlewareType?('('+_middlewareType+')'):'');</span>
 &nbsp;
 &nbsp;
   /**
@@ -1074,15 +1076,15 @@ module.exports = bind;
    * must be made here, since their values can change not only on a per-request, but
    * also a per-route basis.
    */
-<span class="cstat-no" title="statement not covered">  var enhancedFn = <span class="fstat-no" title="function not covered">function routeTargetFnWrapper(req, res, next) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var enhancedFn = <span class="fstat-no" title="function not covered" >function routeTargetFnWrapper(req, res, next) {</span></span>
 &nbsp;
     // Set req.options, using `options` to supply default values
-<span class="cstat-no" title="statement not covered">    req.options = _.merge({}, options || {}, req.options || {});</span>
+<span class="cstat-no" title="statement not covered" >    req.options = _.merge({}, options || {}, req.options || {});</span>
 &nbsp;
     // This event can be tapped into to take control of
     // (synchronous) logic that should be run before each bound
     // route handler function runs.
-<span class="cstat-no" title="statement not covered">    sails.emit('router:route', {</span>
+<span class="cstat-no" title="statement not covered" >    sails.emit('router:route', {</span>
       req: req,
       res: res,
       next: next,
@@ -1092,7 +1094,7 @@ module.exports = bind;
 &nbsp;
 &nbsp;
     // Trigger original route handler function.
-<span class="cstat-no" title="statement not covered">    fn(req, res, next);</span>
+<span class="cstat-no" title="statement not covered" >    fn(req, res, next);</span>
   };
 &nbsp;
   /**
@@ -1105,15 +1107,15 @@ module.exports = bind;
    * @param  {array} params List of params to apply to the req.params object
    * @return {Function} A middleware function
    */
-<span class="cstat-no" title="statement not covered">  var regexRouteWrapper = <span class="fstat-no" title="function not covered">function(params) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var regexRouteWrapper = <span class="fstat-no" title="function not covered" >function(params) {</span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">    return <span class="fstat-no" title="function not covered">function(req, res, next) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >function(req, res, next) {</span></span>
       // Apply the regex route params
-<span class="cstat-no" title="statement not covered">      params.forEach(<span class="fstat-no" title="function not covered">function(param, index) {</span></span>
-<span class="cstat-no" title="statement not covered">        req.params[param] = req.params[index];</span>
+<span class="cstat-no" title="statement not covered" >      params.forEach(<span class="fstat-no" title="function not covered" >function(param, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >        req.params[param] = req.params[index];</span>
       });
       // Call enhancedFn
-<span class="cstat-no" title="statement not covered">      enhancedFn(req, res, next);</span>
+<span class="cstat-no" title="statement not covered" >      enhancedFn(req, res, next);</span>
     };
   };
 &nbsp;
@@ -1125,30 +1127,30 @@ module.exports = bind;
    * @param  {Function} fn      Middleware function to run if URL does NOT match regexes
    * @return {Function} A middleware function
    */
-<span class="cstat-no" title="statement not covered">  var skipRegexesWrapper = <span class="fstat-no" title="function not covered">function(regexes, fn) {</span></span>
+<span class="cstat-no" title="statement not covered" >  var skipRegexesWrapper = <span class="fstat-no" title="function not covered" >function(regexes, fn) {</span></span>
 &nbsp;
     // Remove anything that's not a regex
-<span class="cstat-no" title="statement not covered">    regexes = _.compact(regexes.map(<span class="fstat-no" title="function not covered">function(regex) {</span></span>
-<span class="cstat-no" title="statement not covered">      if (regex instanceof RegExp) {</span>
-<span class="cstat-no" title="statement not covered">        return regex;</span>
+<span class="cstat-no" title="statement not covered" >    regexes = _.compact(regexes.map(<span class="fstat-no" title="function not covered" >function(regex) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (regex instanceof RegExp) {</span>
+<span class="cstat-no" title="statement not covered" >        return regex;</span>
       }
-<span class="cstat-no" title="statement not covered">      sails.log.warn('Invalid regex "' + regex + "' supplied to skipRegexesWrapper; ignoring.");</span>
-<span class="cstat-no" title="statement not covered">      return undefined;</span>
+<span class="cstat-no" title="statement not covered" >      sails.log.warn('Invalid regex "' + regex + "' supplied to skipRegexesWrapper; ignoring.");</span>
+<span class="cstat-no" title="statement not covered" >      return undefined;</span>
     }));
 &nbsp;
 &nbsp;
-<span class="cstat-no" title="statement not covered">    return <span class="fstat-no" title="function not covered">function(req, res, next) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >function(req, res, next) {</span></span>
 &nbsp;
       // Check for matches
-<span class="cstat-no" title="statement not covered">      for (var i = 0; i &lt; regexes.length; i++) {</span>
-<span class="cstat-no" title="statement not covered">        if (req.url.match(regexes[i])) {</span>
+<span class="cstat-no" title="statement not covered" >      for (var i = 0; i &lt; regexes.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        if (req.url.match(regexes[i])) {</span>
           // If we find one, bail out
-<span class="cstat-no" title="statement not covered">          return next();</span>
+<span class="cstat-no" title="statement not covered" >          return next();</span>
         }
       }
 &nbsp;
       // Otherwise continue with the handler
-<span class="cstat-no" title="statement not covered">      return fn(req, res, next);</span>
+<span class="cstat-no" title="statement not covered" >      return fn(req, res, next);</span>
 &nbsp;
     };
 &nbsp;
@@ -1156,65 +1158,65 @@ module.exports = bind;
 &nbsp;
   // If verb is not specified, default to CRUD methods.
   // You can still explicitly route to "all /path" if you want ALLLLlllll the things.
-<span class="cstat-no" title="statement not covered">  var targetVerb = verb || ['get', 'put', 'post', 'delete', 'patch'];</span>
+<span class="cstat-no" title="statement not covered" >  var targetVerb = verb || ['get', 'put', 'post', 'delete', 'patch'];</span>
 &nbsp;
   // Function to actually bind
-<span class="cstat-no" title="statement not covered">  var targetFn;</span>
+<span class="cstat-no" title="statement not covered" >  var targetFn;</span>
 &nbsp;
   // Regex to check if the route is...a regex.
-<span class="cstat-no" title="statement not covered">  var regExRoute = /^r\|(.*)\|(.*)$/;</span>
+<span class="cstat-no" title="statement not covered" >  var regExRoute = /^r\|(.*)\|(.*)$/;</span>
 &nbsp;
   // Perform the check
-<span class="cstat-no" title="statement not covered">  var matches = path.match(regExRoute);</span>
+<span class="cstat-no" title="statement not covered" >  var matches = path.match(regExRoute);</span>
 &nbsp;
   // If it *is* a regex, create a RegExp object that Express can bind,
   // pull out the params, and wrap the handler in regexRouteWrapper
-<span class="cstat-no" title="statement not covered">  if (matches) {</span>
-<span class="cstat-no" title="statement not covered">    path = new RegExp(matches[1]);</span>
-<span class="cstat-no" title="statement not covered">    var params = matches[2].split(',');</span>
-<span class="cstat-no" title="statement not covered">    targetFn = regexRouteWrapper(params);</span>
+<span class="cstat-no" title="statement not covered" >  if (matches) {</span>
+<span class="cstat-no" title="statement not covered" >    path = new RegExp(matches[1]);</span>
+<span class="cstat-no" title="statement not covered" >    var params = matches[2].split(',');</span>
+<span class="cstat-no" title="statement not covered" >    targetFn = regexRouteWrapper(params);</span>
   }
 &nbsp;
   // Otherwise just bind enhancedFn
   else {
-<span class="cstat-no" title="statement not covered">    targetFn = enhancedFn;</span>
+<span class="cstat-no" title="statement not covered" >    targetFn = enhancedFn;</span>
   }
 &nbsp;
   // If options.skipRegex is specified, make sure it's an array
-<span class="cstat-no" title="statement not covered">  if (options.skipRegex) {</span>
-<span class="cstat-no" title="statement not covered">    if (!Array.isArray(options.skipRegex)) {</span>
-<span class="cstat-no" title="statement not covered">      options.skipRegex = [options.skipRegex];</span>
+<span class="cstat-no" title="statement not covered" >  if (options.skipRegex) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!Array.isArray(options.skipRegex)) {</span>
+<span class="cstat-no" title="statement not covered" >      options.skipRegex = [options.skipRegex];</span>
     }
   }
   // Otherwise just make it an empty array
   else {
-<span class="cstat-no" title="statement not covered">    options.skipRegex = [];</span>
+<span class="cstat-no" title="statement not covered" >    options.skipRegex = [];</span>
   }
 &nbsp;
   // If "skipAssets" option is true, add the skipAssets regex
   // to the options.skipRegex array
-<span class="cstat-no" title="statement not covered">  if (options.skipAssets) {</span>
-<span class="cstat-no" title="statement not covered">    options.skipRegex.push(skipAssetsRegex);</span>
+<span class="cstat-no" title="statement not covered" >  if (options.skipAssets) {</span>
+<span class="cstat-no" title="statement not covered" >    options.skipRegex.push(skipAssetsRegex);</span>
   }
 &nbsp;
   // If we have anything in the options.skipRegex array, wrap
   // the target function again.
-<span class="cstat-no" title="statement not covered">  if (options.skipRegex.length) {</span>
-<span class="cstat-no" title="statement not covered">    targetFn = skipRegexesWrapper(options.skipRegex, targetFn);</span>
+<span class="cstat-no" title="statement not covered" >  if (options.skipRegex.length) {</span>
+<span class="cstat-no" title="statement not covered" >    targetFn = skipRegexesWrapper(options.skipRegex, targetFn);</span>
   }
 &nbsp;
   // Ensure targetVerb is an array
-<span class="cstat-no" title="statement not covered">  if (!Array.isArray(targetVerb)) {<span class="cstat-no" title="statement not covered">targetVerb = [targetVerb];}</span></span>
+<span class="cstat-no" title="statement not covered" >  if (!Array.isArray(targetVerb)) {<span class="cstat-no" title="statement not covered" >targetVerb = [targetVerb];}</span></span>
   // Loop through the verbs we want to bind
-<span class="cstat-no" title="statement not covered">  targetVerb.forEach(<span class="fstat-no" title="function not covered">function(verb) {</span></span>
-<span class="cstat-no" title="statement not covered">    verb = verb.toLowerCase();</span>
+<span class="cstat-no" title="statement not covered" >  targetVerb.forEach(<span class="fstat-no" title="function not covered" >function(verb) {</span></span>
+<span class="cstat-no" title="statement not covered" >    verb = verb.toLowerCase();</span>
     // Bind the function to the private router
-<span class="cstat-no" title="statement not covered">    sails.router._privateRouter[verb](path, targetFn);</span>
+<span class="cstat-no" title="statement not covered" >    sails.router._privateRouter[verb](path, targetFn);</span>
     // Emit an event to make hooks aware that a route was bound
     // This allows hooks to handle routes directly if they want to-
     // e.g. with Express, the handler for this event looks like:
     // sails.hooks.http.app[verb || 'all'](path, target);
-<span class="cstat-no" title="statement not covered">    sails.emit('router:bind', {</span>
+<span class="cstat-no" title="statement not covered" >    sails.emit('router:bind', {</span>
       path: path,
       target: targetFn,
       verb: verb,
@@ -1235,26 +1237,26 @@ module.exports = bind;
  * @returns {Object} sanitized arguments
  * @api private
  */
-<span class="fstat-no" title="function not covered">function sanitize(path, target, verb, options) {</span>
-<span class="cstat-no" title="statement not covered">  options = options || {};</span>
+<span class="fstat-no" title="function not covered" >function sanitize(path, target, verb, options) {</span>
+<span class="cstat-no" title="statement not covered" >  options = options || {};</span>
 &nbsp;
   // If trying to bind '*', that's probably not what was intended, so fix it up
-<span class="cstat-no" title="statement not covered">  path = path === '*' ? '/*' : path;</span>
+<span class="cstat-no" title="statement not covered" >  path = path === '*' ? '/*' : path;</span>
 &nbsp;
   // If route has an HTTP verb (e.g. `get /foo/bar`, `put /bar/foo`, etc.) parse it out,
-<span class="cstat-no" title="statement not covered">  var detectedVerb = sailsUtil.detectVerb(path);</span>
+<span class="cstat-no" title="statement not covered" >  var detectedVerb = sailsUtil.detectVerb(path);</span>
   // then prune it from the path
-<span class="cstat-no" title="statement not covered">  path = detectedVerb.original;</span>
+<span class="cstat-no" title="statement not covered" >  path = detectedVerb.original;</span>
   // Keep track of parsed verb so we know if it was specified later
-<span class="cstat-no" title="statement not covered">  options.detectedVerb = detectedVerb;</span>
+<span class="cstat-no" title="statement not covered" >  options.detectedVerb = detectedVerb;</span>
 &nbsp;
   // If a verb override was not specified,
   // use the detected verb from the string route
-<span class="cstat-no" title="statement not covered">  if (!verb) {</span>
-<span class="cstat-no" title="statement not covered">    verb = detectedVerb.verb;</span>
+<span class="cstat-no" title="statement not covered" >  if (!verb) {</span>
+<span class="cstat-no" title="statement not covered" >    verb = detectedVerb.verb;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered">  return {</span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
     path: path,
     target: target,
     verb: verb,
@@ -1263,11 +1265,10 @@ module.exports = bind;
 }
 &nbsp;
 &nbsp;</pre></td></tr>
-</tbody></table></pre>
+</table></pre>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 06:01:52 GMT+0000 (UTC)</div>
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 15 2017 22:13:49 GMT+0000 (UTC)</div>
 </div>
-
-
-</body></html>
+</body>
+</html>
