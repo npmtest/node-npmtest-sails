@@ -1,0 +1,1273 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-sails/node_modules/sails/lib/router/bind.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-sails">npmtest-sails (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-sails/node_modules/sails/lib/router/bind.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">8.51% <small>(8 / 94)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 57)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 15)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">8.6% <small>(8 / 93)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> » <a href="index.html">node-npmtest-sails/node_modules/sails/lib/router/</a> » bind.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Module dependencies.
+ */
+&nbsp;
+var _ = require('@sailshq/lodash');
+var sailsUtil = require('sails-util');
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * Expose `bind` method.
+ */
+module.exports = bind;
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * Bind new route(s)
+ *
+ * @param {String|RegExp} path
+ * @param {String|Object|Array|Function} target
+ * @param {String} verb (optional)
+ * @param {Object} options (optional)
+ *
+ * @this {SJSRouter}
+ * @return {SJSApp}
+ *
+ * @api private
+ */
+&nbsp;
+<span class="fstat-no" title="function not covered">function bind( /* path, target, verb, options */ ) {</span>
+<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = sanitize.apply(this, Array.prototype.slice.call(arguments));</span>
+<span class="cstat-no" title="statement not covered">  var path = args.path;</span>
+<span class="cstat-no" title="statement not covered">  var target = args.target;</span>
+<span class="cstat-no" title="statement not covered">  var verb = args.verb;</span>
+<span class="cstat-no" title="statement not covered">  var options = args.options;</span>
+&nbsp;
+  // Don't allow paths with "length" as a route param, because Express chokes on it
+<span class="cstat-no" title="statement not covered">  if (path.match(/\/:length($|\/)/)) {</span>
+<span class="cstat-no" title="statement not covered">    throw new Error('Failed to bind route: `'+ path +'`\n'+</span>
+    'Routes which contain `/:length` in their address URL are not supported by Sails/Express (consider using `/:len`)');
+  }
+&nbsp;
+  // Bind a list of multiple functions in order
+<span class="cstat-no" title="statement not covered">  if (_.isArray(target)) {</span>
+<span class="cstat-no" title="statement not covered">    bindArray.apply(this, [path, target, verb, options]);</span>
+  }
+  // Handle string redirects
+  // (to either public-facing&nbsp;URLs or internal routes)
+  else <span class="cstat-no" title="statement not covered">if (_.isString(target) &amp;&amp; target.match(/^(https?:|\/)/)) {</span>
+<span class="cstat-no" title="statement not covered">    bindRedirect.apply(this, [path, target, verb, options]);</span>
+  }
+&nbsp;
+  // Bind a middleware function directly
+  else <span class="cstat-no" title="statement not covered">if (_.isFunction(target)) {</span>
+<span class="cstat-no" title="statement not covered">    bindFunction.apply(this, [path, target, verb, options]);</span>
+  }
+&nbsp;
+  // If target is an object with a `target`, pull out the rest
+  // of the keys as route options and then bind the target.
+  else <span class="cstat-no" title="statement not covered">if (_.isPlainObject(target) &amp;&amp; (target.target || target.fn)) {</span>
+<span class="cstat-no" title="statement not covered">    var _target = target.target || target.fn;</span>
+<span class="cstat-no" title="statement not covered">    options = _.merge(options, _.omit(target, 'target'));</span>
+<span class="cstat-no" title="statement not covered">    bind.apply(this, [path, _target, verb, options]);</span>
+  }
+  else {
+&nbsp;
+    // If we make it here, the router doesn't know how to parse the target.
+    //
+    // This doesn't mean that it's necessarily invalid though--
+    // so we'll emit an event informing any listeners that an unrecognized route
+    // target was encountered.  Then hooks can listen to this event and act
+    // accordingly.  This makes it easier to add functionality to Sails.
+<span class="cstat-no" title="statement not covered">    sails.emit('route:typeUnknown', {</span>
+      path: path,
+      target: target,
+      verb: verb,
+      options: options
+    });
+&nbsp;
+    // Note that, in the future, it would be good to track emissions of "typeUnknown" to
+    // avoid logic errors that result in circular routes.
+    // (part of the effort to make a more friendly environment for custom hook developers)
+  }
+&nbsp;
+  // Makes `.bind()` chainable (sort of)
+<span class="cstat-no" title="statement not covered">  return sails;</span>
+&nbsp;
+}
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * Requests will be redirected to the specified string
+ * (which should be a URL or redirectable path.)
+ *
+ * @api private
+ */
+<span class="fstat-no" title="function not covered">function bindRedirect(path, redirectTo, verb, options) {</span>
+<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  bind.apply(this,[path, <span class="fstat-no" title="function not covered">function(req, res) {</span></span>
+<span class="cstat-no" title="statement not covered">    sails.log.verbose('Redirecting request (`' + path + '`) to `' + redirectTo + '`...');</span>
+<span class="cstat-no" title="statement not covered">    res.redirect(redirectTo);</span>
+  }, verb, options]);
+}
+&nbsp;
+&nbsp;
+/**
+ * Recursively bind an array of targets in order
+ *
+ * TODO: Use a counter to prevent indefinite loops--
+ * only possible if a bad route is bound,
+ * but would still potentially be helpful.
+ *
+ * @api private
+ */
+<span class="fstat-no" title="function not covered">function bindArray(path, target, verb, options) {</span>
+<span class="cstat-no" title="statement not covered">  var self = this;</span>
+<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (target.length === 0) {</span>
+<span class="cstat-no" title="statement not covered">    sails.log.verbose('Ignoring empty array in `router.bind(' + path + ')`...');</span>
+  } else {
+    // Bind each middleware fn
+<span class="cstat-no" title="statement not covered">    _.each(target, <span class="fstat-no" title="function not covered">function(fn) {</span></span>
+<span class="cstat-no" title="statement not covered">      bind.apply(self,[path, fn, verb, options]);</span>
+    });
+  }
+}
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * Attach middleware function to route.
+ *
+ * @api private
+ */
+<span class="fstat-no" title="function not covered">function bindFunction(path, fn, verb, options) {</span>
+<span class="cstat-no" title="statement not covered">  var sails = this.sails;</span>
+&nbsp;
+  // Regex to check if a URL is an asset (something with a file extension)
+<span class="cstat-no" title="statement not covered">  var skipAssetsRegex = /^[^?]*\/[^?\/]+\.[^?\/]+(\?.*)?$/;</span>
+&nbsp;
+  // Make sure (optional) options is a valid plain object ({})
+<span class="cstat-no" title="statement not covered">  options = _.isPlainObject(options) ? _.cloneDeep(options) : {};</span>
+<span class="cstat-no" title="statement not covered">  var _middlewareType = options._middlewareType || fn._middlewareType || (fn.name &amp;&amp; ('FUNCTION: ' + fn.name));</span>
+<span class="cstat-no" title="statement not covered">  sails.log.silly('Binding route :: ', verb || '', path, _middlewareType?('('+_middlewareType+')'):'');</span>
+&nbsp;
+&nbsp;
+  /**
+   * `router:route`
+   *
+   * Create a closure that emits the `router:route` event each time the route is hit
+   * before actually triggering the target function.
+   *
+   * NOTE: Modifications to route path parameters (i.e. `req.params`) or to `req.options`
+   * must be made here, since their values can change not only on a per-request, but
+   * also a per-route basis.
+   */
+<span class="cstat-no" title="statement not covered">  var enhancedFn = <span class="fstat-no" title="function not covered">function routeTargetFnWrapper(req, res, next) {</span></span>
+&nbsp;
+    // Set req.options, using `options` to supply default values
+<span class="cstat-no" title="statement not covered">    req.options = _.merge({}, options || {}, req.options || {});</span>
+&nbsp;
+    // This event can be tapped into to take control of
+    // (synchronous) logic that should be run before each bound
+    // route handler function runs.
+<span class="cstat-no" title="statement not covered">    sails.emit('router:route', {</span>
+      req: req,
+      res: res,
+      next: next,
+      options: options,
+      fn: fn
+    });
+&nbsp;
+&nbsp;
+    // Trigger original route handler function.
+<span class="cstat-no" title="statement not covered">    fn(req, res, next);</span>
+  };
+&nbsp;
+  /**
+   * Wrap a regex route in a helper function that pulls out regex params
+   *
+   * Example: for route: 'r|/\\d+/(.*)/(.*)$|foo,bar', the two parenthesized
+   * groups would be pulled out as req.params[0] and req.params[1] by Express;
+   * the regexRouteWrapper would then map them to req.params['foo'] and req.params['bar']
+   *
+   * @param  {array} params List of params to apply to the req.params object
+   * @return {Function} A middleware function
+   */
+<span class="cstat-no" title="statement not covered">  var regexRouteWrapper = <span class="fstat-no" title="function not covered">function(params) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return <span class="fstat-no" title="function not covered">function(req, res, next) {</span></span>
+      // Apply the regex route params
+<span class="cstat-no" title="statement not covered">      params.forEach(<span class="fstat-no" title="function not covered">function(param, index) {</span></span>
+<span class="cstat-no" title="statement not covered">        req.params[param] = req.params[index];</span>
+      });
+      // Call enhancedFn
+<span class="cstat-no" title="statement not covered">      enhancedFn(req, res, next);</span>
+    };
+  };
+&nbsp;
+  /**
+   * Wrap a route in a helper function that first checks whether the URL matches
+   * any of a set of regexes, and if so, skips the defined handler.
+   *
+   * @param  {array}   regexes Array of regexes to match the URL against
+   * @param  {Function} fn      Middleware function to run if URL does NOT match regexes
+   * @return {Function} A middleware function
+   */
+<span class="cstat-no" title="statement not covered">  var skipRegexesWrapper = <span class="fstat-no" title="function not covered">function(regexes, fn) {</span></span>
+&nbsp;
+    // Remove anything that's not a regex
+<span class="cstat-no" title="statement not covered">    regexes = _.compact(regexes.map(<span class="fstat-no" title="function not covered">function(regex) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (regex instanceof RegExp) {</span>
+<span class="cstat-no" title="statement not covered">        return regex;</span>
+      }
+<span class="cstat-no" title="statement not covered">      sails.log.warn('Invalid regex "' + regex + "' supplied to skipRegexesWrapper; ignoring.");</span>
+<span class="cstat-no" title="statement not covered">      return undefined;</span>
+    }));
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return <span class="fstat-no" title="function not covered">function(req, res, next) {</span></span>
+&nbsp;
+      // Check for matches
+<span class="cstat-no" title="statement not covered">      for (var i = 0; i &lt; regexes.length; i++) {</span>
+<span class="cstat-no" title="statement not covered">        if (req.url.match(regexes[i])) {</span>
+          // If we find one, bail out
+<span class="cstat-no" title="statement not covered">          return next();</span>
+        }
+      }
+&nbsp;
+      // Otherwise continue with the handler
+<span class="cstat-no" title="statement not covered">      return fn(req, res, next);</span>
+&nbsp;
+    };
+&nbsp;
+  };
+&nbsp;
+  // If verb is not specified, default to CRUD methods.
+  // You can still explicitly route to "all /path" if you want ALLLLlllll the things.
+<span class="cstat-no" title="statement not covered">  var targetVerb = verb || ['get', 'put', 'post', 'delete', 'patch'];</span>
+&nbsp;
+  // Function to actually bind
+<span class="cstat-no" title="statement not covered">  var targetFn;</span>
+&nbsp;
+  // Regex to check if the route is...a regex.
+<span class="cstat-no" title="statement not covered">  var regExRoute = /^r\|(.*)\|(.*)$/;</span>
+&nbsp;
+  // Perform the check
+<span class="cstat-no" title="statement not covered">  var matches = path.match(regExRoute);</span>
+&nbsp;
+  // If it *is* a regex, create a RegExp object that Express can bind,
+  // pull out the params, and wrap the handler in regexRouteWrapper
+<span class="cstat-no" title="statement not covered">  if (matches) {</span>
+<span class="cstat-no" title="statement not covered">    path = new RegExp(matches[1]);</span>
+<span class="cstat-no" title="statement not covered">    var params = matches[2].split(',');</span>
+<span class="cstat-no" title="statement not covered">    targetFn = regexRouteWrapper(params);</span>
+  }
+&nbsp;
+  // Otherwise just bind enhancedFn
+  else {
+<span class="cstat-no" title="statement not covered">    targetFn = enhancedFn;</span>
+  }
+&nbsp;
+  // If options.skipRegex is specified, make sure it's an array
+<span class="cstat-no" title="statement not covered">  if (options.skipRegex) {</span>
+<span class="cstat-no" title="statement not covered">    if (!Array.isArray(options.skipRegex)) {</span>
+<span class="cstat-no" title="statement not covered">      options.skipRegex = [options.skipRegex];</span>
+    }
+  }
+  // Otherwise just make it an empty array
+  else {
+<span class="cstat-no" title="statement not covered">    options.skipRegex = [];</span>
+  }
+&nbsp;
+  // If "skipAssets" option is true, add the skipAssets regex
+  // to the options.skipRegex array
+<span class="cstat-no" title="statement not covered">  if (options.skipAssets) {</span>
+<span class="cstat-no" title="statement not covered">    options.skipRegex.push(skipAssetsRegex);</span>
+  }
+&nbsp;
+  // If we have anything in the options.skipRegex array, wrap
+  // the target function again.
+<span class="cstat-no" title="statement not covered">  if (options.skipRegex.length) {</span>
+<span class="cstat-no" title="statement not covered">    targetFn = skipRegexesWrapper(options.skipRegex, targetFn);</span>
+  }
+&nbsp;
+  // Ensure targetVerb is an array
+<span class="cstat-no" title="statement not covered">  if (!Array.isArray(targetVerb)) {<span class="cstat-no" title="statement not covered">targetVerb = [targetVerb];}</span></span>
+  // Loop through the verbs we want to bind
+<span class="cstat-no" title="statement not covered">  targetVerb.forEach(<span class="fstat-no" title="function not covered">function(verb) {</span></span>
+<span class="cstat-no" title="statement not covered">    verb = verb.toLowerCase();</span>
+    // Bind the function to the private router
+<span class="cstat-no" title="statement not covered">    sails.router._privateRouter[verb](path, targetFn);</span>
+    // Emit an event to make hooks aware that a route was bound
+    // This allows hooks to handle routes directly if they want to-
+    // e.g. with Express, the handler for this event looks like:
+    // sails.hooks.http.app[verb || 'all'](path, target);
+<span class="cstat-no" title="statement not covered">    sails.emit('router:bind', {</span>
+      path: path,
+      target: targetFn,
+      verb: verb,
+      options: options,
+      originalFn: fn
+    });
+&nbsp;
+  });
+&nbsp;
+&nbsp;
+}
+&nbsp;
+&nbsp;
+&nbsp;
+/**
+ * Sanitize the arguments to `sails.router.bind()`
+ *
+ * @returns {Object} sanitized arguments
+ * @api private
+ */
+<span class="fstat-no" title="function not covered">function sanitize(path, target, verb, options) {</span>
+<span class="cstat-no" title="statement not covered">  options = options || {};</span>
+&nbsp;
+  // If trying to bind '*', that's probably not what was intended, so fix it up
+<span class="cstat-no" title="statement not covered">  path = path === '*' ? '/*' : path;</span>
+&nbsp;
+  // If route has an HTTP verb (e.g. `get /foo/bar`, `put /bar/foo`, etc.) parse it out,
+<span class="cstat-no" title="statement not covered">  var detectedVerb = sailsUtil.detectVerb(path);</span>
+  // then prune it from the path
+<span class="cstat-no" title="statement not covered">  path = detectedVerb.original;</span>
+  // Keep track of parsed verb so we know if it was specified later
+<span class="cstat-no" title="statement not covered">  options.detectedVerb = detectedVerb;</span>
+&nbsp;
+  // If a verb override was not specified,
+  // use the detected verb from the string route
+<span class="cstat-no" title="statement not covered">  if (!verb) {</span>
+<span class="cstat-no" title="statement not covered">    verb = detectedVerb.verb;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return {</span>
+    path: path,
+    target: target,
+    verb: verb,
+    options: options
+  };
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 21:41:48 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
