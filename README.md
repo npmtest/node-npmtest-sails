@@ -1,6 +1,6 @@
 # npmtest-sails
 
-#### test coverage for  [sails (v0.12.13)](http://sailsjs.org)  [![npm package](https://img.shields.io/npm/v/npmtest-sails.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-sails) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-sails.svg)](https://travis-ci.org/npmtest/node-npmtest-sails)
+#### basic test coverage for  [sails (v0.12.13)](http://sailsjs.org)  [![npm package](https://img.shields.io/npm/v/npmtest-sails.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-sails) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-sails.svg)](https://travis-ci.org/npmtest/node-npmtest-sails)
 
 #### API-driven framework for building realtime apps, using MVC conventions (based on Express and Socket.io)
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-sails/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-sails/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-sails/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-sails/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-sails/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-sails/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-sails/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-sails/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-sails/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-sails/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-sails/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-sails/build/coverage.html/index.html)
 
